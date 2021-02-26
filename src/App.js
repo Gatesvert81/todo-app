@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext } from 'react';
+import { Provider } from 'react-redux'
+import './App.css'
+import store from './redux/store'
+import Home from './MainComponents/Home';
+import ImageComp from './MainComponents/ImageComp';
+import Wrapper from './Components/Wrapper';
+import { ChanegeThemeContext } from './MainComponents/ThemeContext';
+
 
 function App() {
+  const [theme, setTheme] = useContext(ChanegeThemeContext)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store} >
+        <Wrapper className="appTheme" themeColor={theme} >
+          <div className="App">
+            <ImageComp />
+            <Home />
+          </div>
+        </Wrapper>
+    </Provider>
+
   );
 }
 
